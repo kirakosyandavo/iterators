@@ -1,6 +1,7 @@
 #include"vector_impl.h"
 using namespace std;
-void Vector::reallocate(int new_capacity){
+template<typename T>
+void Vector<T>::reallocate(int new_capacity){
     int*tmp=new int[new_capacity];
     for(int i=0;i<m_size;i++){
         tmp[i]=m_data[i];
@@ -9,14 +10,16 @@ void Vector::reallocate(int new_capacity){
     m_data=tmp;
 
 }
-int Vector::at(int index)const{
+template<typename T>
+int Vector<T>::at( int index)const{
     if(index>=m_size){
          cout<<"there is no such a index";
            exit(0);
     }
     return m_data[index];
 }
-void Vector::push_back(int index){
+template <typename T>
+void Vector<T>::push_back(T index){
     if(m_capacity==0){
         m_capacity=2;
         reallocate(m_capacity);
@@ -32,16 +35,20 @@ void Vector::push_back(int index){
     }
     m_size++;
 }
-void Vector::pop_back(){
+template<typename T>
+void Vector<T>::pop_back(){
     m_size=m_size-1;
 }
-int Vector::getSize()const{
+template<typename T>
+int Vector<T>::getSize()const{
  return m_size;
-}
-int Vector::getCap()const{
+} 
+template<typename T>
+int Vector<T>::getCap()const{
     return m_capacity;
 }
-void Vector:: resize(int new_size){
+template<typename T>
+void Vector<T>:: resize(int new_size){
     if(new_size<m_capacity){
         m_size=new_size;
     }  
@@ -51,7 +58,9 @@ void Vector:: resize(int new_size){
 
     }
 }
-    void Vector:: reserve(int new_cap){
+
+template<typename T>
+    void Vector<T>:: reserve(int new_cap){
                reallocate(new_cap);
                m_capacity=new_cap;
                if(new_cap<m_size){
@@ -59,7 +68,8 @@ void Vector:: resize(int new_size){
                 m_capacity=new_cap;
                }
                }
-int Vector::front()const{
+template<typename T>
+T Vector<T>::front()const{
     if(m_size==0){
         cout<<"there is no element";
         exit(0);
@@ -67,26 +77,29 @@ int Vector::front()const{
     return m_data[0];
     
 }
-    int Vector::back()const{
+     template<typename T>
+    T Vector<T>::back()const{
         if(m_size==0){
             cout<<"there is no element"; 
     }    
     return m_data[m_size];    
    
     }
-
-    bool Vector:: isEmpty()const{
+   template<typename T>
+    bool Vector<T>:: isEmpty()const{
             if(m_size==0){
                 return false;
             }
             return true;
     }
-    void Vector:: shrink_to_fit(){
+    template<typename T>
+    void Vector<T>:: shrink_to_fit(){
         m_capacity=m_size;
         reallocate(m_size);
 
     }
-   void Vector::insert(int index,int value){
+    template<typename T>
+   void Vector<T>::insert(int index,T value){
     
     if(m_size==m_capacity){
         m_capacity=m_capacity*2;
@@ -98,9 +111,9 @@ int Vector::front()const{
     }
     m_data[index]=value;
 
-
-   } 
-   void Vector::erase(int index){
+   }
+   template<typename T> 
+   void Vector<T>::erase(int index){
     if(index>=m_size){
         exit(0);
     }
@@ -109,12 +122,14 @@ int Vector::front()const{
     }
     m_size--;
    }
-   void Vector::clear(){
+   template<typename T>
+   void Vector<T>::clear(){
     m_size=0;
     m_capacity=0;
     delete[] m_data;
    }
-   void Vector::print(){
+   template<typename T>
+   void Vector<T>::print(){
     for(int i=0;i<m_size;i++){
         cout<<m_data[i]<<"\t";
     }
