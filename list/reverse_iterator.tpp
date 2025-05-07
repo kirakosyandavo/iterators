@@ -12,7 +12,7 @@ template<typename Iter>
  }
 template<typename T>
 template<typename Iter>
-typename List<T>::template reverse_iterator<Iter>& List<T>::reverse_iterator<Iter>::operator=(reverse_iterator& other){
+typename List<T>::template reverse_iterator<Iter>& List<T>::reverse_iterator<Iter>::operator=(const reverse_iterator& other){
       iterat=other;
   }
   template<typename T>
